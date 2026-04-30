@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>電影清單 - 阮慶兒</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; background-color: #fce4ec; padding: 50px; text-align: center; }
+        .movie-card { background: white; padding: 20px; margin: 10px auto; border-radius: 10px; width: 60%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { color: #880e4f; }
+        .time { color: #888; font-size: 0.9em; }
+        .back-link { display: inline-block; margin-top: 20px; color: #ba68c8; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>🎬 阮慶兒 的即將上映電影清單</h2>
+    <p class="time">更新時間: {{ update_time }}</p>
+    {% for movie in movies %}
+    <div class="movie-card">
+        <h3>{{ movie.title }}</h3>
+        <p>上映日期: {{ movie.release_date }}</p>
+    </div>
+    {% endfor %}
+    <br>
+    <a href="/" class="back-link">⬅ 返回 阮慶兒 的首頁</a>
+</body>
+</html>
