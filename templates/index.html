@@ -1,11 +1,91 @@
-<div class="button-grid">
-    <a href="/mis" class="blue btn">資訊管理導論</a> 
-    
-    <a href="/today" class="blue btn">今天日期</a>
-    
-    <a href="#" class="blue btn">關於 阮慶兒</a>
-    
-    <a href="/movie2" class="purple btn">爬取電影進資料庫</a>
-    <a href="/movie3" class="purple btn">查詢電影資料庫</a>
-    
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>阮慶兒 的個人首頁</title>
+    <style>
+        body { 
+            font-family: "Microsoft JhengHei", sans-serif; 
+            background-color: #fce4ec; /* Màu hồng nhẹ cho Nhi */
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+        }
+        .container { 
+            background: #ffffff; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            text-align: center; 
+            width: 90%; 
+            max-width: 900px; 
+        }
+        h1 { 
+            color: #880e4f; 
+            margin-bottom: 30px; 
+            font-size: 32px; 
+            border-bottom: 2px solid #f8bbd0; 
+            padding-bottom: 10px; 
+        }
+        .button-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 15px; 
+        }
+        .btn { 
+            padding: 18px 10px; 
+            border: none; 
+            border-radius: 8px; 
+            color: white; 
+            font-weight: bold; 
+            cursor: pointer; 
+            text-decoration: none; 
+            font-size: 15px; 
+            transition: 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+            opacity: 0.9; 
+        }
+        
+        /* Màu sắc các nút giống hình mẫu của Nhi */
+        .blue { background-color: #4fc3f7; }
+        .green { background-color: #81c784; }
+        .purple { background-color: #ba68c8; }
+        .orange { background-color: #ffb74d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>阮慶兒 的個人首頁</h1>
+        <div class="button-grid">
+            <!-- Nhóm nút màu xanh -->
+            <a href="/mis" class="blue btn">資訊管理導論</a>
+            <a href="/today" class="blue btn">今天日期</a>
+            <a href="/about" class="blue btn">關於 阮慶兒</a>
+            
+            <!-- Nhóm nút màu xanh lá -->
+            <a href="#" class="green btn">GET 傳值範例</a>
+            <a href="#" class="green btn">帳密 POST 驗證</a>
+            <a href="#" class="green btn">基礎數學運算</a>
+            <a href="#" class="green btn">進階次方與根號</a>
+            
+            <!-- Nhóm nút màu cam -->
+            <a href="#" class="orange btn">線上擲筊</a>
+            
+            <!-- Nhóm nút màu tím (Quan trọng cho bài tập Movie) -->
+            <a href="/movie2" class="purple btn">爬取電影進資料庫</a>
+            <a href="/movie3" class="purple btn">查詢電影資料庫</a>
+            
+            <a href="#" class="purple btn">爬取課程</a>
+            <a href="#" class="purple btn">爬取即將上映電影</a>
+        </div>
     </div>
+</body>
+</html>
