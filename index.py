@@ -5,7 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# MongoDB 連線
+# Kết nối MongoDB
 uri = "mongodb+srv://knhi280125_db_user:x3N6DpTxIzBlfzZ7@cluster0.bdra68f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(uri, tlsCAFile=certifi.where())
 db = client['movie_db']
@@ -15,17 +15,23 @@ movies_col = db['movies']
 def index():
     return render_template('index.html')
 
-# --- Nhóm nút màu Xanh (Thông tin) ---
+# 1. Nút Thông tin khóa học
 @app.route('/mis')
 def mis():
-    return render_template('mis.html') # Trang em vừa chụp ảnh cho anh xem
+    return render_template('mis.html')
 
+# 2. Nút Ngày giờ hôm nay
 @app.route('/today')
 def today():
-    now = datetime.now().strftime("%Y年%m月%d日 %H:%M:%S")
-    return f"<h1>今天的日期時間是：{now}</h1><br><a href='/'>返回首頁</a>"
+    now = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    return render_template('today.html', now=now)
 
-# --- Nhóm nút màu Tím (Bài tập Movie - QUAN TRỌNG) ---
+# 3. Nút Giới thiệu bản thân
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+# 4. Nút Bài tập Movie 2 (Lưu dữ liệu)
 @app.route('/movie2')
 def movie2():
     upcoming_movies = [
@@ -38,6 +44,7 @@ def movie2():
     update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return render_template('movie2.html', movies=upcoming_movies, update_time=update_time)
 
+# 5. Nút Bài tập Movie 3 (Tìm kiếm)
 @app.route('/movie3', methods=['GET', 'POST'])
 def movie3():
     query_result = []
@@ -46,5 +53,3 @@ def movie3():
         keyword = request.form.get('keyword')
         query_result = list(movies_col.find({"title": {"$regex": keyword, "$options": "i"}}))
     return render_template('movie3.html', movies=query_result, keyword=keyword)
-
-# Các route khác em có thể thêm tương tự...
