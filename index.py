@@ -53,3 +53,7 @@ def movie3():
         keyword = request.form.get('keyword')
         query_result = list(movies_col.find({"title": {"$regex": keyword, "$options": "i"}}))
     return render_template('movie3.html', movies=query_result, keyword=keyword)
+
+@app.route("/demo")
+def demo():
+    return render_template("demo.html")
