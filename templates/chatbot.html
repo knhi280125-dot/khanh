@@ -1,30 +1,64 @@
-{% if user_message %}
-    <div class="message user-message">
-        {{ user_message }}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIS - 聊天機器人 Demo</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #e5ddd5; }
+        .chat-container { background: white; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; height: 550px; }
+        .chat-header { background: #075e54; color: white; padding: 15px; border-radius: 15px 15px 0 0; font-weight: bold; display: flex; justify-content: space-between; }
+        .chat-header a { color: #eee; text-decoration: none; font-size: 14px; padding-top: 3px; }
+        .chat-body { flex: 1; padding: 20px; overflow-y: auto; background: #efeae2; display: flex; flex-direction: column; }
+        .bubble { padding: 12px 15px; border-radius: 10px; margin-bottom: 15px; max-width: 85%; font-size: 16px; line-height: 1.5; }
+        .user { background: #dcf8c6; align-self: flex-end; text-align: left; margin-left: auto; color: #000; }
+        .bot { background: white; align-self: flex-start; border: 1px solid #ddd; color: #000; }
+        .chat-footer { padding: 15px; background: #f0f0f0; border-radius: 0 0 15px 15px; }
+        form { display: flex; }
+        input[type="text"] { flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 20px; outline: none; font-size: 15px; }
+        button { background: #128c7e; color: white; border: none; padding: 10px 20px; border-radius: 20px; margin-left: 10px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <span>🤖 MIS 智能聊天機器人 Demo</span>
+            <a href="/">&larr; 返回首頁</a>
+        </div>
+        <div class="chat-body">
+            <div class="bubble bot">
+                你好！我是 MIS 系統專案機器人。您可以試著問我「天氣」、「路口」或輸入「靜宜資管特色」！
+            </div>
+            
+            {% if user_message %}
+                <div class="bubble user">{{ user_message }}</div>
+            {% endif %}
+            
+            {% if trigger_type %}
+                <div class="bubble bot">
+                    {% if trigger_type == "feature" %}
+                        <b>🌟 靜宜大學管理資訊系統學系（MIS）核心特色介紹：</b><br><br>
+                        靜宜資管系致力於培養兼具「資訊技術」與「管理智慧」的跨領域數位人才。在當今大數據與人工智慧（AI）飛速發展的時代，本系緊跟科技前沿，核心課程全面涵蓋雲端運算、智慧物聯網、電子商務、以及企業資源規劃（ERP）等關鍵領域。我們不僅注重扎實的程式設計能力（如 Python、Web 前端與後端開發、資料庫管理），更強調如何將科技轉化為實用的商業決策與創新解決方案。<br><br>
+                        本系擁有新穎專業的實驗室與充沛的學術資源，全面推行「專題實作」與「企業實習」雙軌並進的教學模式。每一位同學在畢業前都必須親自參與完整的專案開發，從系統分析、資料庫設計到最終的雲端部署，累積實打實的實戰經驗。此外，系所積極與國內外知名科技企業進行產學合作，提供豐富的實習機會，讓學生在校期間即可無縫對接職場，達到「畢業即就業」的卓越目標。<br><br>
+                        除了專業技術，靜宜資管更重視學生的國際視野與團隊協作能力，鼓勵參與各項全國性資訊專題競賽並屢創佳績。不論你未來立志成為系統分析師、全端網頁工程師、資料分析師還是數位行銷專家，靜宜資管都將是你實現科技夢想、翻轉未來最堅實的跳板！歡迎加入我們的行列，一同翻轉數位新世代！
+                    {% elif trigger_type == "hello" %}
+                        你好！我是 MIS 智能助手，很高興能為您服務，有什麼我可以幫忙的嗎？
+                    {% elif trigger_type == "weather" %}
+                        您可以到首頁輸入縣市名稱（例如：臺中市），即可查詢即時天氣與降雨機率喔！
+                    {% elif trigger_type == "traffic" %}
+                        臺中市前三大易肇事路口為：1.市政路與環中路口、2.中清路與五權路口、3.太原路與崇德路口。
+                    {% else %}
+                        我收到您的訊息了：「{{ user_message }}」。您可以輸入「靜宜資管特色」來查看專屬功能！
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="chat-footer">
+            <form method="POST">
+                <input type="text" name="message" placeholder="輸入訊息..." required autocomplete="off">
+                <button type="submit">發送</button>
+            </form>
+        </div>
     </div>
-
-    <div class="message bot-message">
-        {% if trigger_type == "feature" %}
-            <p><strong>🌟 靜宜大學管理資訊系統學系（MIS）核心特色介紹：</strong></p>
-            <p>靜宜資管系致力於培養兼具「資訊技術」與「管理智慧」的跨領域數位人才。在當今大數據與人工智慧（AI）飛速發展的時代，本系緊跟科技前沿，核心課程全面涵蓋雲端運算、智慧物聯網、電子商務、以及企業資源規劃（ERP）等關鍵領域。我們不僅注重扎實的程式設計能力（如 Python、Web 前端與後端開發、資料庫管理），更強調如何將科技轉化為實用的商業決策與創新解決方案。</p>
-            <p>本系擁有新穎 civil 級的專業實驗室與充沛的學術資源，全面推行「專題實作」與「企業實習」雙軌並進的教學模式。每一位同學在畢業前都必須親自參與完整的專案開發，從系統分析、資料庫設計到最終的雲端部署，累積實打實的實戰經驗。此外，系所積極與國內外知名科技企業進行產學合作，提供豐富的實習機會，讓學生在校期間即可無縫對接職場，達到「畢業即就業」的卓越目標。</p>
-            <p>除了專業技術，靜宜資管更重視學生的國際視野與團隊協作能力，鼓勵參與各項全國性資訊專題競賽並屢創佳績。不論你未來立志成為系統分析師、全端網頁工程師、資料分析師還是數位行銷專家，靜宜資管都將是你實現科技夢想、翻轉未來最堅實的跳板！歡迎加入我們的行列，一同翻轉數位新世代！</p>
-        
-        {% elif trigger_type == "hello" %}
-            你好！很高興能為 ni 服務，今天想聊點什麼呢？
-        
-        {% elif trigger_type == "weather" %}
-            想查詢天氣嗎？請點擊右上角的「返回首頁」，在天氣查詢欄位輸入你想查詢的台灣城市（例如：臺中市），就可以看到即時的天氣狀態與降雨機率囉！
-        
-        {% elif trigger_type == "traffic" %}
-            根據臺中市交通局數據，以下為提醒您注意的安全路口：<br>
-            1. 西屯區：環中路與市政路口<br>
-            2. 北區：中清路與五權路口<br>
-            3. 北區：太原路與崇德路口<br>
-            行經這些路段時請務必減速慢行，注意安全！
-        
-        {% else %}
-            不好意思，我一時沒聽懂您的意思。您可以試著問我「天氣」、「路口」或輸入「靜宜資管特色」來測試我的功能喔！
-        {% endif %}
-    </div>
-{% endif %}
+</body>
+</html>
