@@ -52,3 +52,4 @@ def chatbot():
     return render_template('chatbot.html', user_message=user_message, trigger_type=trigger_type)
 
 app.debug = True
+# Force system to rebuild with requests module
