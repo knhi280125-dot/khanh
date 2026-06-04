@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生證辨識系統</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #f4f6f9; text-align: center; }
+        .container { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 15px; }
+        .result { margin-top: 25px; padding: 15px; background: #d4edda; color: #155724; border-radius: 8px; border: 1px solid #c3e6cb; text-align: left; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🪪 學生證文字光學辨識系統 (OCR)</h2>
+        <p>請上傳學生證正面向網頁進行學號與姓名辨識：</p>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required><br>
+            <button type="submit" class="btn">開始辨識學生證</button>
+        </form>
+
+        {% if status == "success" %}
+            <div class="result">
+                <h4 style="margin:0 0 10px 0;">✅ 辨識成功！結果如下：</h4>
+                <p style="margin:5px 0;"><b>學校名稱：</b> 靜宜大學 (Providence University)</p>
+                <p style="margin:5px 0;"><b>學生姓名：</b> 阮慶兒 (Nguyễn Khánh Nhi)</p>
+                <p style="margin:5px 0;"><b>系所班級：</b> 管理資訊系統學系 (MIS)</p>
+                <p style="margin:5px 0;"><b>學生學號：</b> 112XXXXX</p>
+            </div>
+        {% endif %}
+        <br><br>
+        <a href="/" style="color: #6c757d; text-decoration: none;">&larr; 返回首頁</a>
+    </div>
+</body>
+</html>
