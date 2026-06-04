@@ -51,5 +51,19 @@ def chatbot():
                 trigger_type = "default"
     return render_template('chatbot.html', user_message=user_message, trigger_type=trigger_type)
 
+@app.route('/id_card', methods=['GET', 'POST'])
+def id_card():
+    status = None
+    if request.method == 'POST':
+        status = "success"
+    return render_template('id_card.html', status=status)
+
+@app.route('/face_recognition', methods=['GET', 'POST'])
+def face_recognition():
+    status = None
+    if request.method == 'POST':
+        status = "success"
+    return render_template('face_recognition.html', status=status)
+
 app.debug = True
 # Force system to rebuild with requests module
